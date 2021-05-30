@@ -28,6 +28,7 @@ class CitySerializer(TranslatedSerializerMixin, TranslatableModelSerializer):
         model = City
         fields = '__all__'
 
+
 class LanguageSerializer(TranslatedSerializerMixin, TranslatableModelSerializer):
     translations = TranslatedFieldsField(shared_model=Language)
 

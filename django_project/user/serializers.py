@@ -2,7 +2,6 @@ from djoser.serializers import UserCreateSerializer
 from rest_framework import serializers
 from service.serializers import ServiceSerializer
 from .models import UserType, User, UserProfile, Licence, Interest, Notification
-
 from parler_rest.serializers import TranslatableModelSerializer
 from parler_rest.fields import TranslatedFieldsField
 from config.mixins import TranslatedSerializerMixin
@@ -44,6 +43,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     service = ServiceSerializer(many=True)
     licence = LicenceSerializer(many=True)
     interest = InterestSerializer(many=True)
+    
     class Meta:
         model = UserProfile
         fields = '__all__'

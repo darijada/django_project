@@ -17,7 +17,7 @@ class ClassificationSerializer(TranslatedSerializerMixin, TranslatableModelSeria
 
 class StorageSerializer(serializers.ModelSerializer):
     city = CitySerializer(many=False)
-    classifications = ClassificationSerializer(many=True)
+    classification = ClassificationSerializer()
     user = UserProfileSerializer(read_only=True)
     
     class Meta:

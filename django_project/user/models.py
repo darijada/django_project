@@ -55,7 +55,7 @@ class UserType(TranslatableModel):
     active = models.BooleanField(_("Active"), default=True, null=True)
 
     def __str__(self):
-        return self.user_type
+        return self.safe_translation_getter('user_type', any_language=True)
     
     class Meta:
         db_table = "user_type"
@@ -71,7 +71,7 @@ class Licence(TranslatableModel):
     active = models.BooleanField(_("Active"), default=True, null=True)
 
     def __str__(self):
-        return self.licence_name
+        return self.safe_translation_getter('licence_name', any_language=True)
     
     class Meta:
         db_table = "licence"
@@ -87,7 +87,7 @@ class Interest(TranslatableModel):
     active = models.BooleanField(_("Active"), default=True, null=True)
 
     def __str__(self):
-        return self.interest_name
+        return self.safe_translation_getter('interest_name', any_language=True)
     
     class Meta:
         db_table = "interest"
@@ -157,7 +157,7 @@ class Notification(TranslatableModel):
     active = models.BooleanField(_("Active"), default=True, null=True)
 
     def __str__(self):
-        return self.notification_text
+        return self.safe_translation_getter('notification_text', any_language=True)
     
     class Meta:
         db_table = "notification"

@@ -2,8 +2,8 @@ from django.db import models
 from django.conf import settings
 from django.utils.translation import gettext as _
 from user.models import *
-
 from parler.models import TranslatableModel, TranslatedFields
+
 
 class VehicleBrand(models.Model):    
     brand_name = models.CharField(_("Brand name"), max_length=50, blank=True, null=True)
@@ -41,7 +41,7 @@ class FuelType(TranslatableModel):
     active = models.BooleanField(_("Active"), default=True, null=True)
 
     def __str__(self):
-        return self.fuel_type_name
+        return self.safe_translation_getter('fuel_type_name', any_language=True)
     
     class Meta:
         db_table = "fuel_type"
@@ -57,7 +57,7 @@ class VehicleCategory(TranslatableModel):
     active = models.BooleanField(_("Active"), default=True, null=True)
 
     def __str__(self):
-        return self.category_name
+        return self.safe_translation_getter('category_name', any_language=True)
     
     class Meta:
         db_table = "vehicle_category"
@@ -73,7 +73,8 @@ class Vehicle(models.Model):
     active = models.BooleanField(_("Active"), default=True, null=True)
 
     vehicle_model = models.ForeignKey(VehicleModel, verbose_name=_("Vehicle model"), null=True, on_delete=models.SET_NULL)
-    fuel_type = models.ForeignKey(VehicleBrand, verbose_name=_("Fuel type"), null=True, on_delete=models.SET_NULL)
+    vehicle_brand = models.ForeignKey(VehicleBrand, verbose_name=_("Vehicle brand"), null=True, on_delete=models.SET_NULL)
+    fuel_type = models.ForeignKey(FuelType, verbose_name=_("Fuel type"), null=True, on_delete=models.SET_NULL)
     vehicle_category = models.ForeignKey(VehicleCategory, verbose_name=_("Vehicle category"), null=True, on_delete=models.SET_NULL)
     user = models.ForeignKey(UserProfile, verbose_name=_("User"), null=True, on_delete=models.SET_NULL)
 

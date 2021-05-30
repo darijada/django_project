@@ -18,4 +18,3 @@ class StorageViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         user = self.request.user
         serializer.save(user=UserProfile.objects.get(user=user))
-

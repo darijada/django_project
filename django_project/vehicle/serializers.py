@@ -3,6 +3,7 @@ from user.serializers import UserProfileSerializer
 from .models import VehicleBrand, VehicleModel, FuelType, VehicleCategory, Vehicle
 from parler_rest.serializers import TranslatableModelSerializer
 from parler_rest.fields import TranslatedFieldsField
+from config.mixins import TranslatedSerializerMixin
 
 
 class VehicleBrandSerializer(serializers.ModelSerializer):
@@ -19,7 +20,7 @@ class VehicleModelSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class FuelTypeSerializer(TranslatableModelSerializer):
+class FuelTypeSerializer(TranslatedSerializerMixin, TranslatableModelSerializer):
     translations = TranslatedFieldsField(shared_model=FuelType)
 
     class Meta:
@@ -27,8 +28,8 @@ class FuelTypeSerializer(TranslatableModelSerializer):
         fields = '__all__'
 
 
-class VehicleCategorySerializer(TranslatableModelSerializer):
-    translations = TranslatedFieldsField(shared_model=Vehicle)
+class VehicleCategorySerializer(TranslatedSerializerMixin, TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=VehicleCategory)
 
     class Meta:
         model = VehicleCategory

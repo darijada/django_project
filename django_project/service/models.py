@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils.translation import gettext as _
-
 from parler.models import TranslatableModel, TranslatedFields
 
 
@@ -12,7 +11,7 @@ class Service(TranslatableModel):
     active = models.BooleanField(_("Active"), default=True, null=True)
 
     def __str__(self):
-        return self.name
+        return self.safe_translation_getter('name', any_language=True)
     
     class Meta:
         db_table = "service"

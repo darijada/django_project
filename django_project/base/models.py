@@ -29,7 +29,7 @@ class Country(TranslatableModel):
     currency = models.ForeignKey(Currency, verbose_name=_("Currency"), null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return self.name
+        return self.safe_translation_getter('name', any_language=True)
     
     class Meta:
         db_table = "country"
@@ -48,7 +48,7 @@ class City(TranslatableModel):
     country = models.ForeignKey(Country, verbose_name=_("Country"), null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return self.name + ', ' + self.country.name
+        return self.safe_translation_getter('name', any_language=True)
     
     class Meta:
         db_table = "city"
@@ -64,11 +64,9 @@ class Language(TranslatableModel):
     code = models.CharField(_("Code"), max_length=5, blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return self.safe_translation_getter('name', any_language=True)
     
     class Meta:
         db_table = "language"
         verbose_name = _("language")
         verbose_name_plural = _("languages")
-
-
