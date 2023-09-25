@@ -1,0 +1,13 @@
+{% load i18n %}
+
+{% block text_body %}
+
+{% blocktrans %}Hello,{% endblocktrans %}
+
+{% blocktrans %}Your offer has been accepted. You can view the status of your offers on your profile page.{% endblocktrans %}
+
+{% blocktrans %}You can contact the user who accepted your offer at the email address: {{ acceptor_email }}{% endblocktrans %}
+
+{% blocktrans %}If you have any questions, please send us an email.{% endblocktrans %}
+
+{% endblock text_body %}

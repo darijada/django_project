@@ -1,0 +1,22 @@
+{% load i18n %}
+
+{% block subject %}
+{% blocktrans %}Activate Your Account{% endblocktrans %}
+{% endblock subject %}
+
+{% block text_body %}
+
+{% blocktrans %}Hello,{% endblocktrans %}
+
+{% blocktrans %}Thank you for registering your account.{% endblocktrans %}
+
+{% trans "To activate your user account, please click on the following link:" %}
+{{ protocol }}://{{ domain }}/{{ url|safe }}
+
+{% blocktrans %}If you encounter any issues with activation, please send  us an email.{% endblocktrans %}
+
+{% if current_password %}
+ {% trans "Your temporary password is:" %} {{ current_password }}
+{% endif %}
+
+{% endblock text_body %}
