@@ -75,23 +75,23 @@ class SuperUserAccountViewSet(viewsets.ModelViewSet):
                 Vehicle.objects.filter(user=user).update(active=False)
                 Storage.objects.filter(user=user).update(active=False)
                 Notification.objects.filter(user=user).update(active=False)
-        else:
-            user_account = models.User.objects.get(id=pk)
-            user_account.is_active = False
-            user_account.is_deleted = True
-            user_account.save()
 
-            msg = render_to_string("email/deletion.html")
-            send_mail(
-                "Your account has been deleted",
-                strip_tags(msg),
-                project_settings.EMAIL_HOST_USER,
-                [user_account.email],
-                html_message=msg,
-                fail_silently=True,
-            )
+        user_account = models.User.objects.get(id=pk)
+        user_account.is_active = False
+        user_account.is_deleted = True
+        user_account.save()
 
-            return Response("User is successfully deleted.", status=201)
+        msg = render_to_string("email/deletion.html")
+        send_mail(
+            "Your account has been deleted",
+            strip_tags(msg),
+            project_settings.EMAIL_HOST_USER,
+            [user_account.email],
+            html_message=msg,
+            fail_silently=True,
+        )
+
+        return Response("User is successfully deleted.", status=201)
 
     @action(detail=True, methods=["PUT"], url_path="block_user", url_name="block_user")
     def block_user(self, request, pk=None, **kwargs):
@@ -125,23 +125,23 @@ class SuperUserAccountViewSet(viewsets.ModelViewSet):
                 Vehicle.objects.filter(user=user).update(active=False)
                 Storage.objects.filter(user=user).update(active=False)
                 Notification.objects.filter(user=user).update(active=False)
-        else:
-            user_account = models.User.objects.get(id=pk)
-            user_account.is_active = False
-            user_account.is_blocked = True
-            user_account.save()
 
-            msg = render_to_string("email/blockage.html")
-            send_mail(
-                "Your account has been blocked",
-                strip_tags(msg),
-                project_settings.EMAIL_HOST_USER,
-                [user_account.email],
-                html_message=msg,
-                fail_silently=True,
-            )
+        user_account = models.User.objects.get(id=pk)
+        user_account.is_active = False
+        user_account.is_blocked = True
+        user_account.save()
 
-            return Response("User is successfully blocked.", status=201)
+        msg = render_to_string("email/blockage.html")
+        send_mail(
+            "Your account has been blocked",
+            strip_tags(msg),
+            project_settings.EMAIL_HOST_USER,
+            [user_account.email],
+            html_message=msg,
+            fail_silently=True,
+        )
+
+        return Response("User is successfully blocked.", status=201)
 
     @action(
         detail=True, methods=["PUT"], url_path="unblock_user", url_name="unblock_user"
